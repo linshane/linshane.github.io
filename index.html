@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>loving days</title>
+	<style type="text/css">
+	p{
+		display: inline;
+		font-size: 50px;
+		color: white;
+	}
+	body{
+		background-image: url(timg.jpg)
+
+		width:100%;
+		height:100%;
+	}
+	.cal{
+        
+		padding-top: 20%;
+		padding-left: 30%;
+		padding-bottom: 30%
+
+	}
+	.header{
+		background-color: #AFEEEE;
+		color: white;
+		font-size: 50px;
+		padding-top: 2%;
+		text-align: center;
+		padding-bottom: 2%;
+	}
+	.text{
+		background-color: #AFEEEE;
+		margin-top: 5%;
+				border-style:solid;
+		border-radius: 25px;
+		border-color: #AFEEEE;
+
+	}
+	.love{
+		color: white;
+		font-size: 50px;
+		padding-top: 2%;
+		padding-left: 15%;
+
+	}
+
+	</style>
+</head>
+<body>
+	<div class="header">
+		和老林头的恋爱计时器
+	</div>
+	<div class="text">
+		<div class="love">
+		我们已经相爱
+	     </div>
+	<div class="cal">
+	<p id="days"></p><p>天</p>
+   <p id="hours"></p><p>时</p>
+   <p id="minutes"></p><p>分</p>
+    <p id="seconds"></p><p>秒</p>
+	</div>
+	</div>
+	
+
+</body>
+<script type="text/javascript">
+	var int = self.setInterval("tick()", 50);
+	 function getMillTime(date){
+     return transformDate(date).getTime();
+ }
+	function transformDate(date){
+    if(typeof date =="string"){
+        return new Date(date.replace(/-/ig,"/").replace("T"," "));
+    }else{
+        return date;
+    }
+ }
+/*返回相差的毫秒数。*/
+function getDifMillSeconds(date1,date2){
+    var stimes = getMillTime(transformDate(date1));
+    var etimes = getMillTime(transformDate(date2));
+    return etimes - stimes;
+}
+ 
+ 
+/*返回相差的秒数。*/
+function getDifSeconds(date1,date2){
+    return Math.floor(getDifMillSeconds(date1,date2) / 1000);
+}    
+ 
+/*返回相差的分。*/
+function getDifMinutes(date1,date2){
+    return Math.floor(getDifMillSeconds(date1,date2)/(1000*60));
+}
+ 
+/*返回相差的小时。*/
+function getDifHours(date1,date2){
+    return Math.floor(getDifMillSeconds(date1,date2)/(1000*60*60));
+}
+ 
+/*返回相差的天数。*/
+function getDifDays(date1,date2){ 
+    var times = getDifSeconds(date1,date2);
+    return Math.ceil(times/(3600 * 24));
+} 
+function tick(){
+	var date1 = new Date();
+var date2 = transformDate("2018/5/11 22:00:00");
+var daycom = getDifDays(date2,date1);
+var hourcom = getDifHours(date2,date1);
+hourcom=hourcom%24;
+var minutecom = getDifMinutes(date2,date1);
+minutecom = minutecom%60;
+var secondcom = getDifSeconds(date2,date1);
+secondcom = secondcom%60;
+days.innerHTML=daycom;
+hours.innerHTML=hourcom;
+minutes.innerHTML = minutecom;
+seconds.innerHTML = secondcom;
+}
+
+</script>
+</html>
