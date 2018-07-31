@@ -68,7 +68,7 @@
 
 </body>
 <script type="text/javascript">
-	var int = self.setInterval("tick()", 50);
+	
 	 function getMillTime(date){
      return transformDate(date).getTime();
  }
@@ -108,7 +108,7 @@ function getDifDays(date1,date2){
     return Math.ceil(times/(3600 * 24));
 } 
 function tick(){
-	var date1 = new Date();
+	var date1 = transformDate("2018/7/27 23:22:00");
 var date2 = transformDate("2018/5/11 22:00:00");
 var daycom = getDifDays(date2,date1);
 var hourcom = getDifHours(date2,date1);
